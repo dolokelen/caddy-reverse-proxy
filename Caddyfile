@@ -30,7 +30,7 @@
 		format json
 	}
 
-	# Route /auth/* to backend (Django auth, JWT, etc.)
+		# Route /auth/* to backend
 	handle /auth/* {
 		reverse_proxy {
 			dynamic a {
@@ -45,7 +45,7 @@
 			}
 			import lb_settings
 			import passive_health_checks
-			header_up Host {request.host}
+			header_up Host {$PUBLIC_HOST}
 		}
 	}
 
@@ -64,11 +64,11 @@
 			}
 			import lb_settings
 			import passive_health_checks
-			header_up Host {request.host}
+			header_up Host {$PUBLIC_HOST}
 		}
 	}
 
-	# Route /media/* to backend (Django media files)
+	# Route /media/* to backend
 	handle /media/* {
 		reverse_proxy {
 			dynamic a {
@@ -83,7 +83,7 @@
 			}
 			import lb_settings
 			import passive_health_checks
-			header_up Host {request.host}
+			header_up Host {$PUBLIC_HOST}
 		}
 	}
 
